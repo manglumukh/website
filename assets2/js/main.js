@@ -78,9 +78,32 @@
     })
   }
 
-  /**
-   * Toggle .header-scrolled class to #header when page is scrolled
+ /**
+   * Header fixed top on scroll
    */
+  let selectHeader = select('#header')
+  if (selectHeader) {
+    let headerOffset = selectHeader.offsetTop
+    let nextElement = selectHeader.nextElementSibling
+    const headerFixed = () => {
+      if ((headerOffset - window.scrollY) <= 0) {
+        selectHeader.classList.add('fixed-top')
+        nextElement.classList.add('scrolled-offset')
+      } else {
+        selectHeader.classList.remove('fixed-top')
+        nextElement.classList.remove('scrolled-offset')
+      }
+    }
+    window.addEventListener('load', headerFixed)
+    onscroll(document, headerFixed)
+  }
+
+
+
+
+ /**
+   * Toggle .header-scrolled class to #header when page is scrolled
+   
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
@@ -93,6 +116,7 @@
     window.addEventListener('load', headerScrolled)
     onscroll(document, headerScrolled)
   }
+  */
 
   /**
    * Hero carousel indicators
@@ -105,6 +129,12 @@
     heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>":
       heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
   });
+
+
+
+
+
+ 
 
   /**
    * Back to top button
